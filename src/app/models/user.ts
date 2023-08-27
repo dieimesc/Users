@@ -1,4 +1,6 @@
 export class User{
-  login: string;
-  password: string;
+
+  id: any;
+  login: string | undefined;
+  password: string | undefined;
 }

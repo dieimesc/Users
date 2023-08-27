@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+
 import { User } from '../models/user';
 import {RouterModule} from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
+import { UserService } from '../shared/services/http-service.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-users',
@@ -10,13 +14,13 @@ import {RouterModule} from '@angular/router';
 })
 export class UsersComponent implements OnInit {
 
-  usuarios: User[];
-  constructor(private authService: AuthService) {
-     this.usuarios = authService.Usuarios;
+  usuarios$: Observable<any>;
+  constructor(private userService: UserService) {
+     this.usuarios$ = this.userService.list();
 
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
   }
 
 
