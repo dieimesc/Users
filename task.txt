@@ -1,0 +1,18 @@
+Atividade: 
+
+- Criar uma api para cadastro de usuário e login em .NET usando EntityFramework com autenticação JWT.
+- Criar um Website em Angular 2+ consumindo a API. 
+	Tela de cadastro.
+	Tela de Login.
+	Tela de dados do cliente (exibe pós login).
+
+Rotas da API:
+POST /users
+POST/ login
+GET /users/me
+
+Usar banco de dados SQLServer rodando local via Docker.
+
+É preciso explicar as implmentações feitas no código com comentários e enviar via e-mail para mauricio.santos@goimage.com.br as aplicações de Back e Front compactadas. Enviar por e-mail também as orientações de como rodar o Banco de dados no docker.
+
+Data limite para envio: 20/08 15:10
