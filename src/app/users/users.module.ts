@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 
 import { UserDetalheComponent } from '../user-detalhe/user-detalhe.component';
 import { AuthService } from '../shared/services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [UserFormComponent, UserDetalheComponent],
   imports: [ CommonModule,  RouterModule, FormsModule ],
   exports: [],
-  providers: [AuthService],
+  providers: [AuthService, JwtHelperService],
 })
 export class UsersModule {}

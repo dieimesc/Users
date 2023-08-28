@@ -2,13 +2,7 @@
   <div class="col s6">
     <p>Lista de Usuários</p>
     <div class="collection">
-      <a
-        class="collection-item"
-        *ngFor="let usuario of usuarios$ | async"
-        [routerLink]="[usuario.id]"
-      >
-        {{ usuario.login }}
-      </a>
+
     </div>
   </div>
   <div class="col s6">

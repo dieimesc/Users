@@ -14,10 +14,9 @@ import { Observable } from 'rxjs';
 })
 export class UsersComponent implements OnInit {
 
-  usuarios$: Observable<any>;
-  constructor(private userService: UserService) {
-     this.usuarios$ = this.userService.list();
 
+  constructor(private userService: UserService) {
+    // this.usuarios$ = this.userService.list();
   }
   ngOnInit(): void {
 

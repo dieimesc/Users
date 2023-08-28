@@ -9,7 +9,11 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserDetalheComponent } from './user-detalhe/user-detalhe.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+export function getToken(): string {
+  return <string> localStorage.getItem('token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +26,17 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    JwtModule.forRoot({
+      config: {
+          tokenGetter: getToken
+      }
+  })
   ],
-  providers: [],
+  providers: [JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

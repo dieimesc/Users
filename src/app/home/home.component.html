@@ -1,6 +1,16 @@
-<div class="container">
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
-</div>
+
+  <div class="card-header">
+    <div class="float-left" *ngIf="(this.authenticatedUser$ | async) as usuario; else loading">
+      <h4>Usuário  logado com sucesso</h4>
+    </div>
+    <ng-template #loading>
+      <span>Carregando dados do usuário...</span>
+    </ng-template>
+
+    <div class="float-right">
+      <button type="button" class="btn btn-primary" [routerLink]="['user']">
+        Cadastrar Novo Usuário
+      </button>
+    </div>
+  </div>
 
