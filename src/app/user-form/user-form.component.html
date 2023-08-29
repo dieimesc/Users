@@ -1,1 +1,71 @@
-<p>user-form works!</p>
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="login">Nome de Usuário</label>
+        <input
+          type="text"
+          class="form-control"
+          name="login"
+          [(ngModel)]="form.login"
+          required
+          minlength="3"
+          maxlength="20"
+          #login="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && login.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="login.errors && f.submitted">
+          <div *ngIf="login.errors['required']">nome de usuário é obrigatório</div>
+          <div *ngIf="login.errors['minlength']">
+            Nome de usuário precisa ter no mínimo 3 caractetes
+          </div>
+          <div *ngIf="login.errors['maxlength']">
+            Nome de usuário pode ter no máximo 20 caracteres
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="5"
+          #password="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Senha é obrigatória</div>
+          <div *ngIf="password.errors['minlength']">
+            Senha precisa ter no mínimo 5 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Confirmar</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Usuário adicionado com sucesso
+    </div>
+  </div>
+</div>

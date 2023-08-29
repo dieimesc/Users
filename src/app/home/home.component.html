@@ -1,16 +1,20 @@
-
-  <div class="card-header">
-    <div class="float-left" *ngIf="(this.authenticatedUser$ | async) as usuario; else loading">
-      <h4>Usuário  logado com sucesso</h4>
-    </div>
-    <ng-template #loading>
-      <span>Carregando dados do usuário...</span>
-    </ng-template>
-
-    <div class="float-right">
-      <button type="button" class="btn btn-primary" [routerLink]="['user']">
-        Cadastrar Novo Usuário
-      </button>
-    </div>
+<div class="card-header">
+  <div
+    class="float-left"
+    *ngIf="this.authenticatedUser$ | async as usuario; else loading"
+  >
+    <h4>Usuário {{ usuario.login }} logado com sucesso</h4>
+    <span>ID: {{ usuario.id }}</span><br>
+    <span>LOGIN: {{ usuario.login }}</span><br>
+    <span>PASSWORD: {{ usuario.password }}</span><br>
   </div>
+  <ng-template #loading>
+    <span>Carregando dados do usuário...</span>
+  </ng-template>
 
+  <div class="float-right">
+    <button type="button" class="btn btn-primary" [routerLink]="['/user']">
+      Cadastrar Novo Usuário
+    </button>
+  </div>
+</div>

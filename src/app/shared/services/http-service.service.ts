@@ -12,20 +12,24 @@ import { StorageService } from './storage.service';
 })
 export class UserService {
 
-  private readonly API = `${environment.API}users`;
+  private readonly API = environment.API;
   header: any;
 
 
   constructor(private http: HttpClient, private storageService: StorageService) {
     this.header = {
       headers: new HttpHeaders()
-        .set('Authorization',  `Basic ${btoa(storageService.getUser().token)}`)
+      .set('Authorization',  `Bearer ${this.storageService.getUser().token}`)
     }
   }
 
 
   getTodos(): Observable<any> {
     return this.http.get(this.API, { responseType: 'text' });
+  }
+
+  getUserByToken (token: string): Observable<any> {
+    return this.http.get(`${this.API}me/?token=${token}`, this.header );
   }
 
   loadByToken(token: string): Observable<any> {

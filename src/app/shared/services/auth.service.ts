@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../../models/user';
+import { StorageService } from './storage.service';
 
 const AUTH_API = environment.API;
 
@@ -11,11 +12,18 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  httpOptionsWithAuthorization: any;
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private storageService: StorageService) {
+    this.httpOptionsWithAuthorization = {
+      headers: new HttpHeaders()
+      .set('Authorization',  `Bearer ${this.storageService.getUser().token}`)
+    }
+  }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
@@ -32,18 +40,13 @@ export class AuthService {
       httpOptions
     );
   }
- // https://localhost:7221/users/login
 
-  //método pra registrar o usuário (não implementado no backend)
-  register(username: string, email: string, password: string): Observable<any> {
+  //método pra registrar(adicionar) um usuário
+  register(user: User): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signup',
-      {
-        username,
-        email,
-        password,
-      },
-      httpOptions
+      AUTH_API,
+      user,
+      this.httpOptionsWithAuthorization
     );
   }
 

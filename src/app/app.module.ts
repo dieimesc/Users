@@ -18,10 +18,10 @@ export function getToken(): string {
   declarations: [
     AppComponent,
     LoginComponent,
-    UserFormComponent,
     UserDetalheComponent,
     UsersComponent,
-    HomeComponent
+    HomeComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
